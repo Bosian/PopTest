@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var container: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,13 @@ class ViewController: UIViewController {
     @IBAction func handler(_ sender: UIButton) {
         let anim = POPSpringAnimation(propertyNamed: kPOPLayerPositionX)!
         
-        anim.toValue = NSValue(cgPoint: CGPoint(x: 100, y: 200))
-        anim.springSpeed = 12
-        anim.springBounciness = 20
+        anim.fromValue = container.frame.origin.x
+        anim.toValue = container.frame.origin.x - 320
+        anim.springSpeed = 5
+        anim.springBounciness = 5
         
-        button.layer.pop_add(anim, forKey: "springPosition")
+        container.layer.pop_add(anim, forKey: "springPosition")
+        container.layer.anchorPoint = CGPoint(x: 0, y: container.layer.anchorPoint.y)
     }
 }
 
