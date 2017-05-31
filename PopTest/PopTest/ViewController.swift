@@ -22,10 +22,17 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let anim = POPDecayAnimation(propertyNamed: kPOPLayerPositionX)
-        anim?.velocity = 100
         
-        button.layer.pop_add(anim, forKey: "slide")
+    }
+    
+    @IBAction func handler(_ sender: UIButton) {
+        let anim = POPSpringAnimation(propertyNamed: kPOPLayerPositionX)!
+        
+        anim.toValue = NSValue(cgPoint: CGPoint(x: 100, y: 200))
+        anim.springSpeed = 12
+        anim.springBounciness = 20
+        
+        button.layer.pop_add(anim, forKey: "springPosition")
     }
 }
 
